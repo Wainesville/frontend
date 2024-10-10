@@ -47,9 +47,9 @@ export const fetchWatchlist = async () => {
 };
 
 // Add to Watchlist
-export const addToWatchlist = async (movieId) => {
+export const addToWatchlist = async (movieId, title) => { // Include 'title' parameter
   try {
-    await axios.post(`${API_SERVER_URL}/watchlist/add`, { movieId }, {
+    await axios.post(`${API_SERVER_URL}/watchlist/add`, { movieId, title }, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
       },
@@ -64,7 +64,7 @@ export const addToWatchlist = async (movieId) => {
 // Remove from Watchlist
 export const removeFromWatchlist = async (movieId) => {
   try {
-    await axios.delete(`${API_SERVER_URL}/watchlist/remove/${movieId}`, {
+    await axios.delete(`${API_SERVER_URL}/watchlist/remove/${movieId}`, { // Fixed the URL
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
       },
@@ -94,16 +94,15 @@ export const searchMovies = async (query) => {
 
 // Login User
 export const loginUser = async (credentials) => {
-    try {
-      const response = await axios.post(`${API_SERVER_URL}/auth/login`, credentials);
-      localStorage.setItem('token', response.data.token); // Store token in local storage
-      return response.data; // Return user data or any relevant info
-    } catch (error) {
-      console.error('Error logging in:', error);
-      throw error; // Rethrow the error for handling in the component
-    }
-  };
-  
+  try {
+    const response = await axios.post(`${API_SERVER_URL}/auth/login`, credentials);
+    localStorage.setItem('token', response.data.token); // Store token in local storage
+    return response.data; // Return user data or any relevant info
+  } catch (error) {
+    console.error('Error logging in:', error);
+    throw error; // Rethrow the error for handling in the component
+  }
+};
 
 // Register User
 export const registerUser = async (userData) => {
