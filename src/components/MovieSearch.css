@@ -1,0 +1,19 @@
+/* src/components/MovieSearch.css */
+
+.movie-search {
+    padding: 20px;
+  }
+  
+  .movie-search input {
+    margin-right: 10px;
+  }
+  
+  .movie-search ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .movie-search li {
+    margin: 10px 0;
+  }
+  
