@@ -1,33 +1,44 @@
 import React, { useState } from 'react';
-import { loginUser } from '../api';
 
 function Login({ handleLogin }) {
-  const [email, setEmail] = useState(''); // State for email
-  const [password, setPassword] = useState(''); // State for password
-  const [error, setError] = useState(''); // State for error messages
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      await loginUser({ email, password }); // Ensure you're sending email
-      handleLogin(); // Call the handleLogin to update state
-    } catch (err) {
-      setError('Invalid credentials'); // Display invalid credentials error
-    }
+    const user = 'JohnDoe'; // This would be fetched from your authentication process
+    handleLogin(user);
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      {error && <p>{error}</p>} {/* Display login error */}
-      <form onSubmit={handleSubmit}>
-        <label>Email:</label>
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        
-        <label>Password:</label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-
-        <button type="submit">Login</button>
+    <div className="login-page d-flex justify-content-center align-items-center">
+      <form onSubmit={handleSubmit} className="w-50">
+        <h2>Login</h2>
+        <div className="form-group">
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            className="form-control"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            className="form-control"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit" className="btn btn-primary w-100">
+          Login
+        </button>
       </form>
     </div>
   );

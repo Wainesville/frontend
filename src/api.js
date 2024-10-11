@@ -18,6 +18,48 @@ export const fetchTrendingMovies = async () => {
   }
 };
 
+// Fetch MovieInfo
+export const fetchMovieInfo = async (id) => {
+    try {
+      const response = await axios.get(`${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=en-US`);
+      return response.data; // Return the movie data
+    } catch (error) {
+      console.error('Error fetching movie info:', error);
+      return null; // Return null if there's an error
+    }
+  };
+
+// Fetch Movie Genres
+export const fetchGenres = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/genre/movie/list`, {
+        params: { api_key: API_KEY },
+      });
+      return response.data.genres; // Return the list of genres
+    } catch (error) {
+      console.error('Error fetching genres:', error);
+      return [];
+    }
+  };
+  
+  // Fetch Movies by Genre
+  export const fetchMoviesByGenre = async (genreId) => {
+    try {
+      const response = await axios.get(`${BASE_URL}/discover/movie`, {
+        params: {
+          api_key: API_KEY,
+          with_genres: genreId,
+          sort_by: 'popularity.desc', // Sort by popularity
+        },
+      });
+      return response.data.results; // Return the list of movies
+    } catch (error) {
+      console.error('Error fetching movies by genre:', error);
+      return [];
+    }
+  };
+  
+
 // Fetch Upcoming Movies
 export const fetchUpcomingMovies = async () => {
   try {

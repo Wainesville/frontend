@@ -1,7 +1,19 @@
-import React from 'react';
-import { addToWatchlist } from '../api';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { fetchMovieInfo, addToWatchlist } from '../api'; // Ensure you import both functions
 
-function MovieInfo({ movie }) {
+function MovieInfo() {
+  const { id } = useParams(); // Get the movie ID from the URL parameters
+  const [movie, setMovie] = useState(null);
+
+  useEffect(() => {
+    const loadMovieInfo = async () => {
+      const movieData = await fetchMovieInfo(id); // Fetch the movie data using the ID
+      setMovie(movieData);
+    };
+    loadMovieInfo();
+  }, [id]);
+
   const handleAddToWatchlist = async () => {
     try {
       await addToWatchlist(movie.id, movie.title, movie.poster_path);
@@ -10,6 +22,8 @@ function MovieInfo({ movie }) {
       alert('You must be logged in to add movies to your watchlist.');
     }
   };
+
+  if (!movie) return <div>Loading...</div>; // Loading state
 
   return (
     <div className="movie-info">
@@ -22,5 +36,3 @@ function MovieInfo({ movie }) {
 }
 
 export default MovieInfo;
-
-

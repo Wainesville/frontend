@@ -1,19 +1,32 @@
-/* src/components/MovieSearch.css */
-
-.movie-search {
-    padding: 20px;
+.movie-grid {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap onto the next row */
+    justify-content: space-between; /* Space between items */
   }
   
-  .movie-search input {
-    margin-right: 10px;
+  .movie-card {
+    flex: 0 1 calc(25% - 10px); /* 4 items per row, minus margin */
+    margin: 5px; /* Margin around each card */
+    text-align: center; /* Center title text */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional shadow for card */
+    border-radius: 8px; /* Rounded corners for card */
+    overflow: hidden; /* Clip overflowing content */
   }
   
-  .movie-search ul {
-    list-style-type: none;
-    padding: 0;
+  .movie-card img {
+    width: 100%; /* Full width to fit in the card */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Remove any inline spacing */
   }
   
-  .movie-search li {
-    margin: 10px 0;
+  .movie-card h3 {
+    margin: 10px 0 0; /* Space above title */
+    font-size: 16px; /* Adjust title font size */
+    color: #333; /* Optional color for title */
+    max-width: 100%; /* Prevent title from exceeding card width */
+    overflow: hidden; /* Hide overflow text */
+    /* Removed text-overflow and white-space properties to allow wrapping */
+    white-space: normal; /* Allow wrapping */
+    line-height: 1.2; /* Optional: set line height for better readability */
   }
   
