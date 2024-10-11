@@ -45,21 +45,26 @@ export const fetchWatchlist = async () => {
     return [];
   }
 };
-
-// Add to Watchlist
-export const addToWatchlist = async (movieId, title) => { // Include 'title' parameter
-  try {
-    await axios.post(`${API_SERVER_URL}/watchlist/add`, { movieId, title }, {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-      },
-    });
-    return true; // Indicate success
-  } catch (error) {
-    console.error('Error adding to watchlist:', error);
-    return false; // Indicate failure
-  }
-};
+// Add to watchlist
+export const addToWatchlist = async (movieId, title, poster) => {
+    try {
+      await axios.post(`${API_SERVER_URL}/watchlist/add`, {
+        movieId,
+        title,
+        poster
+      }, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+      return true;
+    } catch (error) {
+      console.error('Error adding to watchlist:', error);
+      return false;
+    }
+  };
+  
+  
 
 // Remove from Watchlist
 export const removeFromWatchlist = async (movieId) => {
