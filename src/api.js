@@ -84,11 +84,22 @@ export const fetchWatchlist = async () => {
     return response.data;
   } catch (error) {
     console.error('Error fetching watchlist:', error);
+    
     return [];
   }
 };
-// Add to watchlist
 export const addToWatchlist = async (movieId, title, poster) => {
+    const token = localStorage.getItem('token');
+  
+    // Check if the token is present
+    if (!token) {
+      console.error("No token found! Please log in.");
+      return false;
+    }
+  
+    // Log the Authorization header to check the token value
+    console.log(`Authorization: Bearer ${token}`);
+  
     try {
       await axios.post(`${API_SERVER_URL}/watchlist/add`, {
         movieId,
@@ -96,15 +107,20 @@ export const addToWatchlist = async (movieId, title, poster) => {
         poster
       }, {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          'Authorization': `Bearer ${token}`,
         },
       });
-      return true;
+      return true; // Successfully added to watchlist
     } catch (error) {
-      console.error('Error adding to watchlist:', error);
-      return false;
+      if (error.response && error.response.status === 401) {
+        console.error('Unauthorized: Invalid or expired token. Please log in again.');
+      } else {
+        console.error('Error adding to watchlist:', error.response ? error.response.data : error.message);
+      }
+      return false; // Failed to add to watchlist
     }
   };
+  
   
   
 

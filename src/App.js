@@ -5,6 +5,7 @@ import Login from './components/Login';
 import MovieInfo from './components/MovieInfo'; // Import your MovieInfo component
 import Register from './components/Register';
 import MovieSearch from './components/MovieSearch';
+import Browse from './components/Browse';
 import Watchlist from './components/Watchlist';
 import TrendingMovies from './components/TrendingMovies'; // Import the component
 import UpcomingMovies from './components/UpcomingMovies'; // Import the component
@@ -29,6 +30,7 @@ function App() {
           <Route path="/movie/:id" element={<MovieInfo />} /> {/* Route for MovieInfo */}
           <Route path="/register" element={<Register />} />
           <Route path="/search" element={<MovieSearch />} />
+          <Route path="/browse" element={<Browse />} />
           <Route path="/watchlist" element={<Watchlist />} />
           <Route path="/trending" element={<TrendingMovies />} /> {/* Add route for trending movies */}
           <Route path="/upcoming" element={<UpcomingMovies />} /> {/* Add route for upcoming movies */}
